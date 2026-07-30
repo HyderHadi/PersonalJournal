@@ -1,6 +1,7 @@
 # Gradle files
 .gradle/
 build/
+theme-source-zip-files/
 
 # Local configuration file (sdk path, etc)
 local.properties
