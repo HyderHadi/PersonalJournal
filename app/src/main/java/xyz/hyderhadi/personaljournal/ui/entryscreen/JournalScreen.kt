@@ -16,6 +16,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +28,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import xyz.hyderhadi.personaljournal.ui.theme.AppTypography
 import xyz.hyderhadi.personaljournal.ui.theme.Shapes
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Save
 
 
 @Composable
@@ -46,6 +50,18 @@ fun JournalEntryScreen(
             Box(
                 modifier = Modifier.fillMaxSize().background(colors.secondaryContainer)
             ) {
+
+                FloatingActionButton(
+                    onClick = {},
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(36.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Save,
+                        contentDescription = ""
+                    )
+                }
 
                 BasicTextField(
                     modifier = Modifier
