@@ -20,7 +20,6 @@ private val LightColors = lightColorScheme(
     onPrimary = onPrimaryLightHighContrast,
     primaryContainer = primaryContainerLightHighContrast,
     onPrimaryContainer = onPrimaryContainerLightHighContrast,
-
     secondary = secondaryLightHighContrast,
     onSecondary = onSecondaryLightHighContrast,
     secondaryContainer = secondaryContainerLightHighContrast,
@@ -99,7 +98,7 @@ fun PersonalJournalTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     // Dynamic color in this app is turned off for learning purposes
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -115,7 +114,7 @@ fun PersonalJournalTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.background.toArgb()
+            window.statusBarColor = colorScheme.secondaryContainer.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }

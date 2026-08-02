@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Personal Journal</string>
+    <string name="app_bar_title_for_entry">(づ｡◕‿‿◕｡)づ</string>
+    <string name="place_holder_journal_entry">Type Here</string>
+    <string name="save_button_journal_screen">Journal entry save button</string>
+    <string name="back_button_app_bar">Back button for app bar</string>
 </resources>

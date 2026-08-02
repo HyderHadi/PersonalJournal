@@ -2,7 +2,10 @@
 .gradle/
 build/
 theme-source-zip-files/
+<<<<<<< HEAD
 
+=======
+>>>>>>> journal-entry-screen
 
 # Local configuration file (sdk path, etc)
 local.properties
