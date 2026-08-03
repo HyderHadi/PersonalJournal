@@ -12,8 +12,8 @@ data class EntryCardUiState(
 val experimentalList: List<EntryCardUiState> = listOf<EntryCardUiState>(
     EntryCardUiState(
         "this is whatever",
-        "Jan 7",
-        "this is whatever kinda of note"
+        "Jan 7 2006",
+        "this is whatever kinda of note jfjsajf fajsf jsajf jasjf jsajfj sajf sajgadjgd dsakdasfkdskfjakfkd jdjsagkdsgk"
     ),
     EntryCardUiState(
         "this is another",

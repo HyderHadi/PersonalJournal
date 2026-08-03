@@ -12,7 +12,7 @@ val bodyFontFamily = FontFamily(
 )
 
 val displayFontFamily = FontFamily(
-    Font(R.font.fontdinerswankyregular, FontWeight.Normal)
+    Font(R.font.knewaveregular, FontWeight.Normal)
 )
 
 val baseline = Typography()
