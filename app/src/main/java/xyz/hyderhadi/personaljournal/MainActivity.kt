@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import xyz.hyderhadi.personaljournal.ui.PersonalJournalAppBar
 import xyz.hyderhadi.personaljournal.ui.appscreen.MainScreen
 import xyz.hyderhadi.personaljournal.ui.appscreen.experimentalList
+import xyz.hyderhadi.personaljournal.ui.entryscreen.JournalEntryScreen
 import xyz.hyderhadi.personaljournal.ui.theme.PersonalJournalTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     },
                     contentWindowInsets = WindowInsets(0)
                 ) {
-                    MainScreen(modifier = Modifier.padding(it), entryCards = experimentalList)
+                    MainScreen(modifier = Modifier.padding(it))
                 }
             }
         }

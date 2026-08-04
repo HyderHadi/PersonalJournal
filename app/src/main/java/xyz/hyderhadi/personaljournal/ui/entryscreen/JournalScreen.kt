@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
@@ -55,19 +56,6 @@ fun JournalEntryScreen(
             Box(
                 modifier = Modifier.fillMaxSize().background(colors.secondaryContainer)
             ) {
-
-                FloatingActionButton(
-                    onClick = { journalEntryViewModel.onEvents(JournalEntryEvents.SaveEntry) },
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(42.dp)
-                ) {
-
-                    Icon(
-                        imageVector = Icons.Default.Save,
-                        contentDescription = stringResource(R.string.save_button_journal_screen)
-                    )
-                }
 
                 BasicTextField(
                     modifier = Modifier
@@ -118,6 +106,20 @@ fun JournalEntryScreen(
                                 colors.surfaceDim,
                                 Shapes.small
                             )
+                    )
+                }
+
+                FloatingActionButton(
+                    onClick = { journalEntryViewModel.onEvents(JournalEntryEvents.SaveEntry) },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(42.dp)
+                        .size(72.dp)
+                ) {
+
+                    Icon(
+                        imageVector = Icons.Default.Save,
+                        contentDescription = stringResource(R.string.save_button_journal_screen)
                     )
                 }
 

@@ -5,7 +5,8 @@ package xyz.hyderhadi.personaljournal.ui.appscreen
 data class EntryCardUiState(
     val title: String = "",
     val date: String = "",
-    val previewText: String = ""
+    val previewText: String = "",
+    val creationDialogShown: Boolean = false
 )
 
 

@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class EntryCardViewModel: ViewModel() {
 
-    private var _entryCardViewModel = MutableStateFlow(EntryCardUiState())
-    val entryCardViewModel: StateFlow<EntryCardUiState> = _entryCardViewModel.asStateFlow()
+    private var _entryCardUiState = MutableStateFlow<List<EntryCardUiState>>(emptyList())
+    val entryCardUiState: StateFlow<List<EntryCardUiState>> = _entryCardUiState.asStateFlow()
 
     fun onEvents(
         entryCardEvent: EntryCardEvents
@@ -28,6 +28,24 @@ class EntryCardViewModel: ViewModel() {
             EntryCardEvents.DeleteEntry -> {
                 // TODO
             }
+        }
+
+        fun openEntry(
+
+        ) {
+            // TODO
+        }
+
+        fun createEntry(
+
+        ) {
+            // TODO
+        }
+
+        fun deleteEntry(
+
+        ) {
+            // TODO
         }
     }
 }
