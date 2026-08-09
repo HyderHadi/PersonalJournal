@@ -9,7 +9,7 @@ data class EntryCardUiState(
     val creationDialogShown: Boolean = false
 )
 
-
+// it was and is being used as a placeholder for MainScreen Entry cards
 val experimentalList: List<EntryCardUiState> = listOf<EntryCardUiState>(
     EntryCardUiState(
         "this is whatever",

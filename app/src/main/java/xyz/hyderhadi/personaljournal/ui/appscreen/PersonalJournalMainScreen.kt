@@ -42,8 +42,7 @@ fun MainScreen(
 ) {
 
     val colors = MaterialTheme.colorScheme
-    // collect the flow state later
-    val entryCardUiState = experimentalList
+    val entryCardUiState = entryCardViewModel.entryCardUiState.collectAsState()
 
     Box(
         modifier = modifier
@@ -57,7 +56,7 @@ fun MainScreen(
             ) {
 
                 LazyColumn {
-                    items(entryCardUiState){ entry ->
+                    items(entryCardUiState.value){ entry ->
                         EntryCard(entryCardUiState = entry)
                     }
                 }
