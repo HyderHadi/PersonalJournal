@@ -9,13 +9,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import dagger.hilt.android.AndroidEntryPoint
+import xyz.hyderhadi.personaljournal.data.data_source.JournalDatabase
+import xyz.hyderhadi.personaljournal.data.repository.OfflineEntriesRepositoryImpl
 import xyz.hyderhadi.personaljournal.ui.PersonalJournalAppBar
+import xyz.hyderhadi.personaljournal.ui.appscreen.EntryCardViewModel
 import xyz.hyderhadi.personaljournal.ui.appscreen.MainScreen
-import xyz.hyderhadi.personaljournal.ui.appscreen.experimentalList
-import xyz.hyderhadi.personaljournal.ui.entryscreen.JournalEntryScreen
 import xyz.hyderhadi.personaljournal.ui.theme.PersonalJournalTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
