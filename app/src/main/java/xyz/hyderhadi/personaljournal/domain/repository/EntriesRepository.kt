@@ -7,7 +7,7 @@ interface EntriesRepository {
 
     fun getAllEntriesStream(): Flow<List<JournalEntry>>
 
-    fun getEntryStream(id: Int): Flow<JournalEntry>
+    suspend fun getEntry(id: Int): JournalEntry
 
     suspend fun createJournalEntry(journalEntry: JournalEntry)
 

@@ -1,8 +1,7 @@
 package xyz.hyderhadi.personaljournal.domain.model
 
-import androidx.room3.Entity
-import androidx.room3.PrimaryKey
-import java.util.Date
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "entries")
 data class JournalEntry(
@@ -10,5 +9,6 @@ data class JournalEntry(
     val id: Int = 0,
     val title: String,
     val journalText: String,
-    val timeStamp: Long
+    val modifiedAt: Long = System.currentTimeMillis(),
+    val scrollState: Int = 0
 )

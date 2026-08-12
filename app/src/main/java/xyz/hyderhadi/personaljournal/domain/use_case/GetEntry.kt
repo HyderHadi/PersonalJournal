@@ -7,7 +7,7 @@ import xyz.hyderhadi.personaljournal.domain.repository.EntriesRepository
 class GetEntry(
     private val repository: EntriesRepository
 ) {
-    operator fun invoke(id: Int): Flow<JournalEntry> {
-        return repository.getEntryStream(id)
+    suspend operator fun invoke(id: Int): JournalEntry {
+        return repository.getEntry(id)
     }
 }

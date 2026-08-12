@@ -4,13 +4,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import xyz.hyderhadi.personaljournal.domain.model.JournalEntry
 import xyz.hyderhadi.personaljournal.domain.repository.EntriesRepository
+import kotlin.collections.sortedByDescending
 
 class GetAllEntriesUseCase(
     private val repository: EntriesRepository
 ) {
     operator fun invoke(): Flow<List<JournalEntry>> {
         return repository.getAllEntriesStream().map { entries ->
-            entries.sortedByDescending { it.timeStamp }
+            entries.sortedByDescending { it.modifiedAt }
         }
     }
 }

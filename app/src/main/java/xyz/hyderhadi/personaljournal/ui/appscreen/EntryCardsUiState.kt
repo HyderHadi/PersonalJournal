@@ -1,15 +1,12 @@
 package xyz.hyderhadi.personaljournal.ui.appscreen
 
 import androidx.room.TypeConverter
+import xyz.hyderhadi.personaljournal.domain.model.JournalEntry
 import java.util.Date
 
 
-data class EntryCardUiState(
-    val id: Int = 0,
-    val title: String = "",
-    val previewText: String = "",
-    val date: String = "",
-    val journalText: String = ""
+data class EntryCardsUiState(
+    val entries: List<JournalEntry> = emptyList(),
 )
 
 class Converters {

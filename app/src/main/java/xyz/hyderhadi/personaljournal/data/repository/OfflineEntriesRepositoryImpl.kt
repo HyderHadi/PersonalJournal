@@ -10,7 +10,7 @@ class OfflineEntriesRepositoryImpl(private val journalEntryDao: JournalEntryDao)
 
     override fun getAllEntriesStream(): Flow<List<JournalEntry>> = journalEntryDao.getAllJournalEntries()
 
-    override fun getEntryStream(id: Int): Flow<JournalEntry> = journalEntryDao.getJournalEntry(id)
+    override suspend fun getEntry(id: Int): JournalEntry = journalEntryDao.getJournalEntry(id)
 
     override suspend fun createJournalEntry(journalEntry: JournalEntry) = journalEntryDao.insert(journalEntry)
 

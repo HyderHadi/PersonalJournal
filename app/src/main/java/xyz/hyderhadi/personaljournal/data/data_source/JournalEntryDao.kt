@@ -1,11 +1,11 @@
 package xyz.hyderhadi.personaljournal.data.data_source
 
-import androidx.room3.Dao
-import androidx.room3.Delete
-import androidx.room3.Insert
-import androidx.room3.OnConflictStrategy
-import androidx.room3.Query
-import androidx.room3.Update
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import xyz.hyderhadi.personaljournal.domain.model.JournalEntry
 
@@ -22,8 +22,8 @@ interface JournalEntryDao {
     suspend fun delete(journalEntry: JournalEntry)
 
     @Query("SELECT * FROM entries WHERE id = :id")
-    fun getJournalEntry(id: Int): Flow<JournalEntry>
+    suspend fun getJournalEntry(id: Int): JournalEntry
 
-    @Query("SELECT * FROM entries ORDER BY date DESC")
+    @Query("SELECT * FROM entries ORDER BY modifiedAt DESC")
     fun getAllJournalEntries(): Flow<List<JournalEntry>>
 }
