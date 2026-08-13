@@ -45,7 +45,11 @@ import xyz.hyderhadi.personaljournal.ui.theme.displayFontFamily
 import xyz.hyderhadi.personaljournal.ui.util.Screen
 import xyz.hyderhadi.personaljournal.ui.util.formatTimeStamp
 import androidx.compose.material3.AlertDialog
-
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -115,6 +119,8 @@ fun EntryCard(
     onDeleteClick: () -> Unit
 ) {
 
+    var showAlertDialog by remember { mutableStateOf(false) }
+
 
     Box(
         modifier = modifier
@@ -167,12 +173,38 @@ fun EntryCard(
                         )
 
                         IconButton(
-                            onClick = { onDeleteClick() },
+                            onClick = { showAlertDialog = true},
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Delete,
                                 tint = MaterialTheme.colorScheme.onSurface,
                                 contentDescription = "Delete Icon"
+                            )
+                        }
+
+                        if(showAlertDialog) {
+                            AlertDialog(
+                                onDismissRequest = { },
+                                confirmButton = {
+                                    TextButton(
+                                        onClick = {
+                                            showAlertDialog = false
+                                            onDeleteClick()
+                                        }
+                                    ) {
+                                        Text("Delete")
+                                    }
+                                },
+                                dismissButton = {
+                                    TextButton(
+                                        onClick = { showAlertDialog = false }
+                                    ) {
+                                        Text("Cancel")
+                                    }
+                                },
+                                title = {
+                                    Text("Delete Journal Entry?")
+                                }
                             )
                         }
                     }
