@@ -1,5 +1,6 @@
 package xyz.hyderhadi.personaljournal.ui.appscreen
 
+import android.app.AlertDialog
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
@@ -20,13 +21,13 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import kotlinx.coroutines.launch
 import xyz.hyderhadi.personaljournal.R
 import xyz.hyderhadi.personaljournal.domain.model.JournalEntry
 import xyz.hyderhadi.personaljournal.ui.theme.Shapes
@@ -44,6 +44,8 @@ import xyz.hyderhadi.personaljournal.ui.theme.bodyFontFamily
 import xyz.hyderhadi.personaljournal.ui.theme.displayFontFamily
 import xyz.hyderhadi.personaljournal.ui.util.Screen
 import xyz.hyderhadi.personaljournal.ui.util.formatTimeStamp
+import androidx.compose.material3.AlertDialog
+
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -104,6 +106,7 @@ fun MainScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun EntryCard(
@@ -164,7 +167,7 @@ fun EntryCard(
                         )
 
                         IconButton(
-                            onClick = onDeleteClick,
+                            onClick = { onDeleteClick() },
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Delete,

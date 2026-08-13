@@ -42,7 +42,10 @@ class MainActivity : ComponentActivity() {
                         Scaffold(
                             modifier = Modifier.fillMaxSize(),
                             topBar = {
-                                PersonalJournalAppBar()
+                                PersonalJournalAppBar(
+                                    canNavigateBack = navController.previousBackStackEntry != null,
+                                    navigateUp = { navController.navigateUp() }
+                                )
                             },
                             contentWindowInsets = WindowInsets(0)
                         ) {
@@ -65,7 +68,10 @@ class MainActivity : ComponentActivity() {
                         Scaffold(
                             modifier = Modifier.fillMaxSize(),
                             topBar = {
-                                PersonalJournalAppBar()
+                                PersonalJournalAppBar(
+                                    canNavigateBack = navController.previousBackStackEntry != null,
+                                    navigateUp = { navController.navigateUp() }
+                                )
                             },
                             contentWindowInsets = WindowInsets(0)
                         ) {

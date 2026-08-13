@@ -2,7 +2,7 @@ package xyz.hyderhadi.personaljournal.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,8 +19,9 @@ import xyz.hyderhadi.personaljournal.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonalJournalAppBar(
-
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    canNavigateBack: Boolean,
+    navigateUp: () -> Unit = {},
 ) {
 
 
@@ -40,12 +41,12 @@ fun PersonalJournalAppBar(
         ),
         modifier = modifier.fillMaxWidth(),
         navigationIcon = {
-            if(false) {
+            if(canNavigateBack) {
                 IconButton(
-                    onClick = {}
+                    onClick = navigateUp
                 ) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.back_button_app_bar)
                     )
                 }
