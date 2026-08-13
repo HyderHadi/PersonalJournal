@@ -52,6 +52,7 @@ fun JournalEntryScreen(
     // to get the specific colors for my theme
     val colors = MaterialTheme.colorScheme
     val state = viewModel.state.value
+    var isDisabledFAB = true
 
     LaunchedEffect(
         key1 = true
@@ -126,17 +127,32 @@ fun JournalEntryScreen(
                     )
                 }
 
+                if (!state.textFieldState.text.toString().isBlank()) {
+                    isDisabledFAB = false
+                }
                 FloatingActionButton (
-                    onClick = { if(viewModel.currentJournalId != null) {
-                        viewModel.onEvents(JournalEntryEvents.UpdateEntry)
-                    } else {
-                        viewModel.onEvents(JournalEntryEvents.SaveEntry)
+                    onClick = { if(!isDisabledFAB) {
+                        if(viewModel.currentJournalId != null) {
+                            viewModel.onEvents(JournalEntryEvents.UpdateEntry)
+                        } else {
+                            viewModel.onEvents(JournalEntryEvents.SaveEntry)
+                        }
                     }
                               },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(42.dp)
-                        .size(72.dp)
+                        .size(72.dp),
+                    containerColor = if(isDisabledFAB) {
+                        colors.surfaceContainer
+                    } else {
+                        colors.primaryContainer
+                    },
+                    contentColor = if(isDisabledFAB) {
+                        colors.surfaceBright
+                    } else {
+                        colors.onPrimaryContainer
+                    }
                 ) {
 
                     Icon(
