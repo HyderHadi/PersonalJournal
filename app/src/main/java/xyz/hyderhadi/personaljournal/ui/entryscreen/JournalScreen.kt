@@ -72,7 +72,7 @@ fun JournalEntryScreen(
         Column {
 
             Box(
-                modifier = Modifier.fillMaxSize().background(colors.secondaryContainer)
+                modifier = Modifier.fillMaxSize().background(colors.secondaryContainer).imePadding()
             ) {
 
                 BasicTextField(
