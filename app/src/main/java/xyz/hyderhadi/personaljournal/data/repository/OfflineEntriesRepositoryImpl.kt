@@ -1,9 +1,9 @@
 package xyz.hyderhadi.personaljournal.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import xyz.hyderhadi.personaljournal.domain.repository.EntriesRepository
-import xyz.hyderhadi.personaljournal.domain.model.JournalEntry
 import xyz.hyderhadi.personaljournal.data.data_source.JournalEntryDao
+import xyz.hyderhadi.personaljournal.domain.model.JournalEntry
+import xyz.hyderhadi.personaljournal.domain.repository.EntriesRepository
 
 class OfflineEntriesRepositoryImpl(private val journalEntryDao: JournalEntryDao): EntriesRepository {
 

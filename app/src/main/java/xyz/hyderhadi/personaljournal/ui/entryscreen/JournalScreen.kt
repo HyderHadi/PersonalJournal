@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.offset
@@ -35,9 +34,6 @@ import xyz.hyderhadi.personaljournal.ui.theme.AppTypography
 import xyz.hyderhadi.personaljournal.ui.theme.Shapes
 
 
-
-
-
 @Composable
 fun JournalEntryScreen(
     modifier: Modifier = Modifier,
@@ -56,6 +52,14 @@ fun JournalEntryScreen(
             when(uiEvent) {
                 JournalEntryViewModel.UiEvent.SaveEntry -> {
                     navController.navigateUp()
+                }
+
+                JournalEntryViewModel.UiEvent.UpdateEntry -> {
+                    navController.navigateUp()
+                }
+
+                JournalEntryViewModel.UiEvent.UpdateTitleOFEntry -> {
+
                 }
             }
         }
@@ -91,7 +95,6 @@ fun JournalEntryScreen(
                                     color = colors.onSecondary
                                 )
                             }
-
                             innerTextField()
                         }
                     }

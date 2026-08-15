@@ -6,5 +6,6 @@ import androidx.compose.foundation.text.input.TextFieldState
 
 data class JournalEntryUiState(
     val textFieldState: TextFieldState = TextFieldState(""),
-    val scrollState: ScrollState = ScrollState(0)
+    val scrollState: ScrollState = ScrollState(0),
+    val entryTitle: String = ""
 )
