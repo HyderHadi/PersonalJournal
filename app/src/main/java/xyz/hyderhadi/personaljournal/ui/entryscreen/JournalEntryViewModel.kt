@@ -37,7 +37,8 @@ class JournalEntryViewModel @Inject constructor(
                         currentJournalId = it.id
                         _state.value = state.value.copy(
                             textFieldState = TextFieldState(it.journalText),
-                            scrollState = ScrollState(it.scrollState)
+                            scrollState = ScrollState(it.scrollState),
+                            entryTitle = ""
                         )
                     }
                 }
@@ -50,13 +51,24 @@ class JournalEntryViewModel @Inject constructor(
             is JournalEntryEvents.SaveEntry -> {
                     if(currentJournalId == null) {
                         viewModelScope.launch {
-                            journalUseCases.addEntryUseCase(
-                                JournalEntry(
-                                    title = state.value.textFieldState.text.toString(),
-                                    journalText = state.value.textFieldState.text.toString(),
-                                    scrollState = state.value.scrollState.value
+                            if (state.value.entryTitle != "") {
+                                journalUseCases.addEntryUseCase(
+                                    JournalEntry(
+                                        title = state.value.entryTitle,
+                                        journalText = state.value.textFieldState.text.toString(),
+                                        scrollState = state.value.scrollState.value
+                                    )
                                 )
-                            )
+                            }
+                            else {
+                                journalUseCases.addEntryUseCase(
+                                    JournalEntry(
+                                        title = state.value.textFieldState.text.toString(),
+                                        journalText = state.value.textFieldState.text.toString(),
+                                        scrollState = state.value.scrollState.value
+                                    )
+                                )
+                            }
                             _eventFlow.emit(UiEvent.SaveEntry)
                         }
                     }
@@ -69,21 +81,58 @@ class JournalEntryViewModel @Inject constructor(
             is JournalEntryEvents.UpdateEntry -> {
                 if(currentJournalId != null) {
                     viewModelScope.launch {
+                        if(state.value.entryTitle != "") {
+                            journalUseCases.updateEntryUseCase(
+                                JournalEntry(
+                                    id = currentJournalId!!,
+                                    title = state.value.entryTitle,
+                                    journalText = state.value.textFieldState.text.toString(),
+                                    scrollState = state.value.scrollState.value
+                                )
+                            )
+                        }
+                        else {
+                            journalUseCases.updateEntryUseCase(
+                                JournalEntry(
+                                    id = currentJournalId!!,
+                                    title = state.value.textFieldState.text.toString(),
+                                    journalText = state.value.textFieldState.text.toString(),
+                                    scrollState = state.value.scrollState.value
+                                )
+                            )
+                        }
+                        _eventFlow.emit(UiEvent.UpdateEntry)
+                    }
+                }
+            }
+            is JournalEntryEvents.UpdateTitleForEntry -> {
+                if(currentJournalId != null) {
+                    viewModelScope.launch {
                         journalUseCases.updateEntryUseCase(
                             JournalEntry(
                                 id = currentJournalId!!,
-                                title = state.value.textFieldState.text.toString(),
+                                title = state.value.entryTitle,
                                 journalText = state.value.textFieldState.text.toString(),
                                 scrollState = state.value.scrollState.value
                             )
                         )
-                        _eventFlow.emit(UiEvent.SaveEntry)
+                        _eventFlow.emit(UiEvent.UpdateTitleOFEntry)
                     }
                 }
             }
         }
     }
+
+    fun updateEntryTitleUiState(text: String) {
+        _state.value = state.value.copy(
+            entryTitle = text
+        )
+    }
+
+
     sealed class UiEvent {
         object SaveEntry: UiEvent()
+        object UpdateEntry: UiEvent()
+        object UpdateTitleOFEntry: UiEvent()
     }
 }

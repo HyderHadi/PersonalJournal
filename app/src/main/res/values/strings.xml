@@ -4,4 +4,6 @@
     <string name="place_holder_journal_entry">Type Here</string>
     <string name="save_button_journal_screen">Journal entry save button</string>
     <string name="back_button_app_bar">Back button for app bar</string>
+    <string name="more_options_content_description">More Options</string>
+    <string name="edit_title">Edit Title</string>
 </resources>
