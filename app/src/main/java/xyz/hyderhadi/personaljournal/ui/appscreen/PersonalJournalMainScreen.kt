@@ -149,14 +149,15 @@ fun EntryCard(
                         Text(
                             text = entry.title,
                             fontFamily = displayFontFamily,
-                            fontSize = 14.sp
+                            fontSize = 14.sp,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                         Text(
                             text = entry.journalText,
-                            fontSize = 12.sp,
+                            fontSize = 10.sp,
                             fontFamily = bodyFontFamily,
                             overflow = TextOverflow.Ellipsis,
-                            maxLines = 1,
                         )
                     }
 

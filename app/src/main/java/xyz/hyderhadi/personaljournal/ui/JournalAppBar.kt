@@ -1,5 +1,6 @@
 package xyz.hyderhadi.personaljournal.ui
 
+import android.R.attr.navigationIcon
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -24,20 +25,15 @@ fun PersonalJournalAppBar(
     navigateUp: () -> Unit = {},
 ) {
 
-
-    // to get the specific colors for my theme
-    val colors = MaterialTheme.colorScheme
-
     CenterAlignedTopAppBar(
 
         // TODO: maybe get different ASCII smiles each time the user wants an entry idk...
         title = { Text(stringResource(R.string.app_name),
                     textAlign = TextAlign.Center)
             // TODO: The entry's name or first couple of words
-
             },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = colors.inversePrimary
+            containerColor = MaterialTheme.colorScheme.inversePrimary
         ),
         modifier = modifier.fillMaxWidth(),
         navigationIcon = {
