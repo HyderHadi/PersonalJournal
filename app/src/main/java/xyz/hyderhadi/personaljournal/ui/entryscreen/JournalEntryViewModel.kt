@@ -33,12 +33,12 @@ class JournalEntryViewModel @Inject constructor(
         savedStateHandle.get<Int>("journalId")?.let { journalId ->
             if(journalId != -1) {
                 viewModelScope.launch {
-                    journalUseCases.getEntry(journalId)?.also {
+                    journalUseCases.getEntry(journalId).also {
                         currentJournalId = it.id
                         _state.value = state.value.copy(
                             textFieldState = TextFieldState(it.journalText),
                             scrollState = ScrollState(it.scrollState),
-                            entryTitle = ""
+                            entryTitle = it.title
                         )
                     }
                 }
@@ -112,7 +112,7 @@ class JournalEntryViewModel @Inject constructor(
                             JournalEntry(
                                 id = currentJournalId!!,
                                 title = state.value.entryTitle,
-                                journalText = state.value.textFieldState.text.toString(),
+                                journalText = journalUseCases.getEntry(currentJournalId!!).journalText,
                                 scrollState = state.value.scrollState.value
                             )
                         )

@@ -138,8 +138,8 @@ fun JournalEntryScreen(
                               },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(42.dp)
-                        .size(72.dp),
+                        .padding(horizontal = 36.dp, vertical = 78.dp)
+                        .size(64.dp),
                     containerColor = if(isDisabledFAB) {
                         colors.surfaceContainer
                     } else {

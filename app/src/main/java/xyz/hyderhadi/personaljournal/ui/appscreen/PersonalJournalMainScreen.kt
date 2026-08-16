@@ -1,9 +1,11 @@
 package xyz.hyderhadi.personaljournal.ui.appscreen
 
 import android.os.Build
+import android.widget.Space
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,19 +77,41 @@ fun MainScreen(
                     .padding(8.dp)
             ) {
 
-                LazyColumn {
-                    items(state.entries){ entry ->
-                        EntryCard(
-                            entry = entry,
-                            modifier = Modifier
-                                .clickable {
-                                    navController.navigate(
-                                        Screen.EntryScreen.route +
-                                                "?journalId=${entry.id}"
-                                    )
-                                },
-                            onDeleteClick = { viewModel.onEvent(EntryCardEvents.DeleteEntry(entry)) }
+                if(state.entries.isEmpty()) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text(
+                            text = "No Journal Entries Yet\n\n(｡•́︿•̀｡)っ",
+                            textAlign = TextAlign.Center,
+                            fontSize = 24.sp,
+                            fontFamily = bodyFontFamily
                         )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Press + to start an entry",
+                            fontFamily = bodyFontFamily,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+                else {
+                    LazyColumn {
+                        items(state.entries){ entry ->
+                            EntryCard(
+                                entry = entry,
+                                modifier = Modifier
+                                    .clickable {
+                                        navController.navigate(
+                                            Screen.EntryScreen.route +
+                                                    "?journalId=${entry.id}"
+                                        )
+                                    },
+                                onDeleteClick = { viewModel.onEvent(EntryCardEvents.DeleteEntry(entry)) }
+                            )
+                        }
                     }
                 }
 
@@ -96,8 +121,8 @@ fun MainScreen(
                     },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(36.dp)
-                        .size(72.dp)
+                        .padding(horizontal = 36.dp, vertical = 78.dp)
+                        .size(64.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,

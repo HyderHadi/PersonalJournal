@@ -15,6 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
@@ -47,12 +48,12 @@ fun PersonalJournalAppBar(
     var expanded by remember { mutableStateOf(false) }
     var showEditTitleDialog by remember { mutableStateOf(false) }
     var editTitleTextField by remember { mutableStateOf("") }
+    var editTitleTextFieldIsWhiteSpaceOnly by remember { mutableStateOf(false) }
     CenterAlignedTopAppBar(
 
         // TODO: maybe get different ASCII smiles each time the user wants an entry idk...
         title = { Text(stringResource(R.string.app_name),
                     textAlign = TextAlign.Center)
-            // TODO: The entry's name or first couple of words
             },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.inversePrimary
@@ -61,7 +62,9 @@ fun PersonalJournalAppBar(
         navigationIcon = {
             if(canNavigateBack) {
                 IconButton(
-                    onClick = navigateUp
+                    onClick = {
+                        navigateUp()
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -109,9 +112,11 @@ fun PersonalJournalAppBar(
                         confirmButton = {
                             TextButton(
                                 onClick = {
-                                    showEditTitleDialog = false
-                                    journalEntryViewModel.updateEntryTitleUiState(text = editTitleTextField)
-                                    journalEntryViewModel.onEvents(JournalEntryEvents.UpdateTitleForEntry)
+                                    if (!editTitleTextFieldIsWhiteSpaceOnly && editTitleTextField.isNotEmpty()) {
+                                        showEditTitleDialog = false
+                                        journalEntryViewModel.updateEntryTitleUiState(text = editTitleTextField)
+                                        journalEntryViewModel.onEvents(JournalEntryEvents.UpdateTitleForEntry)
+                                    }
                                 }
                             ) {
                                 Text("Save")
@@ -136,9 +141,20 @@ fun PersonalJournalAppBar(
                                     }
                                 },
                                 label = {
-                                    Text("Title")
+                                    Text(if(editTitleTextField.isNotEmpty() && editTitleTextField.all { it.isWhitespace() }) {
+                                        editTitleTextFieldIsWhiteSpaceOnly = true
+                                        "Blank names are not allowed"
+                                    } else {
+                                        editTitleTextFieldIsWhiteSpaceOnly = false
+                                        "Title"
+                                    })
                                 },
-                                singleLine = true
+                                singleLine = true,
+                                isError = editTitleTextFieldIsWhiteSpaceOnly,
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    errorLabelColor = MaterialTheme.colorScheme.error,
+                                    errorBorderColor = MaterialTheme.colorScheme.errorContainer
+                                )
                             )
                         }
                     )
