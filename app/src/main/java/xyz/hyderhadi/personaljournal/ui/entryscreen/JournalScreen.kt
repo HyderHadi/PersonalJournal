@@ -44,7 +44,6 @@ fun JournalEntryScreen(
     val colors = MaterialTheme.colorScheme
     val state = viewModel.state.value
     var isDisabledFAB = true
-
     LaunchedEffect(
         key1 = true
     ) {

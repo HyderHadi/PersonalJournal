@@ -1,6 +1,7 @@
 package xyz.hyderhadi.personaljournal.ui
 
 import android.content.Intent
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -45,7 +46,7 @@ fun PersonalJournalAppBar(
     canNavigateBack: Boolean,
     navigateUp: () -> Unit = {},
     currentScreen: Screen,
-    journalEntryViewModel: JournalEntryViewModel = hiltViewModel(),
+    journalEntryViewModel: JournalEntryViewModel = hiltViewModel()
 ) {
 
     var expanded by remember { mutableStateOf(false) }
@@ -53,6 +54,8 @@ fun PersonalJournalAppBar(
     var editTitleTextField by remember { mutableStateOf("") }
     var editTitleTextFieldIsWhiteSpaceOnly by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    var navigationIconPressed by remember { mutableStateOf(false) }
+    val state = journalEntryViewModel.state.value
     CenterAlignedTopAppBar(
 
         // TODO: maybe get different ASCII smiles each time the user wants an entry idk...
@@ -67,7 +70,12 @@ fun PersonalJournalAppBar(
             if(canNavigateBack) {
                 IconButton(
                     onClick = {
-                        navigateUp()
+                        if(state.textFieldState.text.toString() == state.oldTextFieldState.text.toString()) {
+                            navigateUp()
+                        }
+                        else {
+                            navigationIconPressed = true
+                        }
                     }
                 ) {
                     Icon(
@@ -177,7 +185,52 @@ fun PersonalJournalAppBar(
                         }
                     )
                 }
-            }
+
+                    if (navigationIconPressed) {
+                        AlertDialog(
+                            onDismissRequest = { },
+                            confirmButton = {
+                                TextButton(
+                                    onClick = {
+                                        navigationIconPressed = false
+                                        if(journalEntryViewModel.currentJournalId != null) {
+                                            journalEntryViewModel.onEvents(JournalEntryEvents.UpdateEntry)
+                                        }
+                                        else {
+                                            journalEntryViewModel.onEvents(JournalEntryEvents.SaveEntry)
+                                        }
+                                        navigateUp()
+                                    }
+                                ) {
+                                    Text("Save")
+                                }
+                            },
+                            dismissButton = {
+                                TextButton(
+                                    onClick = {
+                                        navigationIconPressed = false
+                                        navigateUp()
+                                    }
+                                ) {
+                                    Text("Cancel")
+                                }
+                            },
+                            title = {
+                                Text("BE WARY, Unsaved Entry!")
+                            }
+                        )
+                    }
+                    else {
+                        BackHandler {
+                            if(state.textFieldState.text.toString() == state.oldTextFieldState.text.toString()) {
+                                navigateUp()
+                            }
+                            else {
+                                navigationIconPressed = true
+                            }
+                        }
+                    }
+                }
         }
     )
 }

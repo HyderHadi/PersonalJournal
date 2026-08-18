@@ -38,7 +38,8 @@ class JournalEntryViewModel @Inject constructor(
                         _state.value = state.value.copy(
                             textFieldState = TextFieldState(it.journalText),
                             scrollState = ScrollState(it.scrollState),
-                            entryTitle = it.title
+                            entryTitle = it.title,
+                            oldTextFieldState = TextFieldState(it.journalText)
                         )
                     }
                 }
@@ -74,9 +75,7 @@ class JournalEntryViewModel @Inject constructor(
                     }
                 }
             is JournalEntryEvents.EnteredContent -> {
-                _state.value = _state.value.copy(
-                    textFieldState = TextFieldState(journalEntryEvent.value)
-                )
+                // IDK
             }
             is JournalEntryEvents.UpdateEntry -> {
                 if(currentJournalId != null) {
