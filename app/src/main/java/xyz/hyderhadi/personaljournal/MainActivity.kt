@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
                                 PersonalJournalAppBar(
                                     canNavigateBack = navController.previousBackStackEntry != null,
                                     navigateUp = { navController.navigateUp() },
-                                    currentScreen = Screen.JournalEntriesScreen
+                                    currentScreen = Screen.JournalEntriesScreen,
                                 )
                             },
                             contentWindowInsets = WindowInsets(0)
@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                                 PersonalJournalAppBar(
                                     canNavigateBack = navController.previousBackStackEntry != null,
                                     navigateUp = { navController.navigateUp() },
-                                    currentScreen = Screen.EntryScreen
+                                    currentScreen = Screen.EntryScreen,
                                 )
                             },
                             contentWindowInsets = WindowInsets(0)

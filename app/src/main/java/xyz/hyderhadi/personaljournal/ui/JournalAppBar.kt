@@ -1,5 +1,6 @@
 package xyz.hyderhadi.personaljournal.ui
 
+import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,6 +36,7 @@ import xyz.hyderhadi.personaljournal.ui.entryscreen.JournalEntryEvents
 import xyz.hyderhadi.personaljournal.ui.entryscreen.JournalEntryViewModel
 import xyz.hyderhadi.personaljournal.ui.theme.bodyFontFamily
 import xyz.hyderhadi.personaljournal.ui.util.Screen
+import androidx.core.net.toUri
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,6 +52,7 @@ fun PersonalJournalAppBar(
     var showEditTitleDialog by remember { mutableStateOf(false) }
     var editTitleTextField by remember { mutableStateOf("") }
     var editTitleTextFieldIsWhiteSpaceOnly by remember { mutableStateOf(false) }
+    val context = LocalContext.current
     CenterAlignedTopAppBar(
 
         // TODO: maybe get different ASCII smiles each time the user wants an entry idk...
@@ -101,6 +105,20 @@ fun PersonalJournalAppBar(
                         onClick = {
                                 showEditTitleDialog = true
                                 expanded = false
+                        },
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
+                    )
+
+                    DropdownMenuItem(
+                        text = {
+                            Text("About")
+                        },
+                        onClick = {
+                            val intent = Intent(
+                                Intent.ACTION_VIEW,
+                                "https://github.com/HyderHadi".toUri()
+                            )
+                            context.startActivity(intent)
                         },
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
                     )
