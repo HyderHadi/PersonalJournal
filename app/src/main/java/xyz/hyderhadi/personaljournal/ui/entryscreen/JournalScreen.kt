@@ -217,7 +217,9 @@ fun JournalEntryScreen(
 
                         FloatingActionButton (
                             onClick = {
-                                previewMarkdown = !previewMarkdown
+                                if(!isDisabledFAB) {
+                                    previewMarkdown = !previewMarkdown
+                                }
                             },
                             modifier = Modifier
                                 .align(Alignment.BottomEnd)
