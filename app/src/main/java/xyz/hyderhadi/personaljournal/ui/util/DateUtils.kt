@@ -12,5 +12,5 @@ import java.time.format.DateTimeFormatter
         return Instant
             .ofEpochMilli(timeStamp)
             .atZone(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("dd MM yyyy"))
+            .format(DateTimeFormatter.ofPattern("dd MM yyyy, hh:mm a"))
     }

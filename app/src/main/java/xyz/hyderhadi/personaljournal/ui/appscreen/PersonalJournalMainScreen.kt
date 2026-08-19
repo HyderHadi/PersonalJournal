@@ -172,13 +172,13 @@ fun EntryCard(
                         Text(
                             text = entry.title,
                             fontFamily = displayFontFamily,
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
                         Text(
                             text = entry.journalText,
-                            fontSize = 10.sp,
+                            fontSize = 12.sp,
                             fontFamily = bodyFontFamily,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -194,6 +194,7 @@ fun EntryCard(
                             text = formatTimeStamp(entry.modifiedAt),
                             fontFamily = displayFontFamily,
                             fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.primaryContainer
                         )
 
                         IconButton(

@@ -114,6 +114,7 @@ fun PersonalJournalAppBar(
                         onClick = {
                                 showEditTitleDialog = true
                                 expanded = false
+                                editTitleTextField = state.entryTitle
                         },
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
                     )
@@ -174,6 +175,7 @@ fun PersonalJournalAppBar(
                         },
                         text = {
                             OutlinedTextField(
+
                                 value = editTitleTextField,
                                 onValueChange = {
                                     if(it.length < 50) {
