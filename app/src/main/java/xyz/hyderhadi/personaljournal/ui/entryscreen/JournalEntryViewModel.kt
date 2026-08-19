@@ -128,6 +128,12 @@ class JournalEntryViewModel @Inject constructor(
         )
     }
 
+    fun loadTutorialIntoTextFieldUiState(text: String) {
+        _state.value = state.value.copy(
+            textFieldState = TextFieldState(text)
+        )
+    }
+
 
     sealed class UiEvent {
         object SaveEntry: UiEvent()

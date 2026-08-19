@@ -79,4 +79,11 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation("com.mikepenz:multiplatform-markdown-renderer:0.37.0")
+    implementation("com.mikepenz:multiplatform-markdown-renderer-m3:0.37.0")
+    implementation("com.mikepenz:multiplatform-markdown-renderer-coil3:0.37.0")
+
+    implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
 }

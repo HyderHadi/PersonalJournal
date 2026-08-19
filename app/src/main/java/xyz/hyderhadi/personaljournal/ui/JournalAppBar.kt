@@ -38,7 +38,6 @@ import xyz.hyderhadi.personaljournal.ui.entryscreen.JournalEntryViewModel
 import xyz.hyderhadi.personaljournal.ui.theme.bodyFontFamily
 import xyz.hyderhadi.personaljournal.ui.util.Screen
 import androidx.core.net.toUri
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonalJournalAppBar(
@@ -56,6 +55,7 @@ fun PersonalJournalAppBar(
     val context = LocalContext.current
     var navigationIconPressed by remember { mutableStateOf(false) }
     val state = journalEntryViewModel.state.value
+    var tutorialAlertDialog by remember { mutableStateOf(false) }
     CenterAlignedTopAppBar(
 
         // TODO: maybe get different ASCII smiles each time the user wants an entry idk...
@@ -119,14 +119,27 @@ fun PersonalJournalAppBar(
 
                     DropdownMenuItem(
                         text = {
+                            Text("Tutorial")
+                        },
+                        onClick = {
+                            tutorialAlertDialog = true
+                            expanded = false
+                        },
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
+                    )
+
+
+                    DropdownMenuItem(
+                        text = {
                             Text("About")
                         },
                         onClick = {
                             val intent = Intent(
                                 Intent.ACTION_VIEW,
-                                "https://github.com/HyderHadi".toUri()
+                                "https://github.com/HyderHadi/PersonalJournal".toUri()
                             )
                             context.startActivity(intent)
+                            expanded = false
                         },
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp)
                     )
@@ -230,7 +243,158 @@ fun PersonalJournalAppBar(
                             }
                         }
                     }
+
+                if(tutorialAlertDialog) {
+                    AlertDialog(
+                        onDismissRequest = { },
+                        confirmButton = {
+                            TextButton(
+                                onClick = {
+                                    journalEntryViewModel.loadTutorialIntoTextFieldUiState(MarkDownTutorial)
+                                    tutorialAlertDialog = false
+                                }
+                            ) {
+                                Text("load")
+                            }
+                        },
+                        dismissButton = {
+                            TextButton(
+                                onClick = {
+                                    tutorialAlertDialog = false
+                                }
+                            ) {
+                                Text("Cancel")
+                            }
+                        },
+                        title = {
+                            Text("Load Tutorial into entry?")
+                        }
+                    )
                 }
+            }
         }
     )
 }
+
+val MarkDownTutorial = """
+    # AI generated tutorial
+    # Markdown Guide
+
+    Welcome to your Markdown guide.
+
+    Press the eye button to preview markdown and learn how to make beautiful journal entries.
+
+    ---
+
+    ## Headings
+
+    # Heading 1
+    ## Heading 2
+    ### Heading 3
+    #### Heading 4
+    ##### Heading 5
+    ###### Heading 6
+
+    ---
+
+    ## Text Formatting
+
+    **Bold text**
+
+    *Italic text*
+
+    ***Bold and italic text***
+
+    ~~Strikethrough text~~
+
+    ---
+
+    ## Lists
+
+    - First item
+    - Second item
+    - Third item
+
+    1. First item
+    2. Second item
+    3. Third item
+
+    - [ ] Uncompleted task
+    - [x] Completed task
+
+    ---
+
+    ## Links
+
+    [Visit Google](https://google.com)
+
+    ---
+
+    ## Images
+
+    ![A cute cat](https://placecats.com/400/250)
+
+    ---
+
+    ## Quotes
+
+    > This is a quote.
+
+    ---
+
+    ## Code
+
+    Use `inline code` inside a sentence.
+
+    ```kotlin
+    fun main() {
+        println("Hello, world!")
+    }
+    ```
+
+    ---
+
+    ## Divider
+
+    ---
+
+    ## Tables
+
+    | Name | Age | City |
+    |------|-----|------|
+    | Alex | 25 | Baghdad |
+    | Sara | 22 | London |
+    | John | 30 | Tokyo |
+
+    ---
+
+    ## Quick Reference
+
+    `# Heading` — Heading
+
+    `**text**` — Bold
+
+    `*text*` — Italic
+
+    `***text***` — Bold and italic
+
+    `~~text~~` — Strikethrough
+
+    `- item` — Bullet list
+
+    `1. item` — Numbered list
+
+    `- [ ] task` — Uncompleted task
+
+    `- [x] task` — Completed task
+
+    `[text](url)` — Link
+
+    `![text](url)` — Image
+
+    `> quote` — Quote
+
+    \`code\` — Inline code
+
+    `---` — Divider
+""".trimIndent()
