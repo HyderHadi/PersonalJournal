@@ -1,7 +1,6 @@
 package xyz.hyderhadi.personaljournal.ui.appscreen
 
 import android.os.Build
-import android.widget.Space
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

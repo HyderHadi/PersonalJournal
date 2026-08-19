@@ -1,6 +1,5 @@
 package xyz.hyderhadi.personaljournal.ui.entryscreen
 
-import android.R.attr.font
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,9 +15,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.CodeOff
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.CodeOff
+import androidx.compose.material.icons.outlined.Preview
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,24 +37,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mikepenz.markdown.coil3.Coil3ImageTransformerImpl
 import com.mikepenz.markdown.compose.LazyMarkdownSuccess
+import com.mikepenz.markdown.m3.Markdown
+import com.mikepenz.markdown.m3.markdownColor
+import com.mikepenz.markdown.m3.markdownTypography
+import com.mikepenz.markdown.model.markdownAnimations
+import com.mikepenz.markdown.model.rememberMarkdownState
 import kotlinx.coroutines.flow.collectLatest
 import xyz.hyderhadi.personaljournal.R
 import xyz.hyderhadi.personaljournal.ui.theme.AppTypography
 import xyz.hyderhadi.personaljournal.ui.theme.Shapes
-import com.mikepenz.markdown.m3.Markdown
-import com.mikepenz.markdown.m3.markdownColor
-import com.mikepenz.markdown.m3.markdownTypography
-import com.mikepenz.markdown.model.MarkdownAnimations
-import com.mikepenz.markdown.model.MarkdownTypography
-import com.mikepenz.markdown.model.markdownAnimations
-import com.mikepenz.markdown.model.rememberMarkdownState
 
 
 @Composable
@@ -238,13 +238,13 @@ fun JournalEntryScreen(
                         ) {
                             if(previewMarkdown && state.textFieldState.text.toString().isNotBlank()) {
                                 Icon(
-                                    imageVector = Icons.Default.Visibility,
+                                    imageVector = Icons.Outlined.CodeOff,
                                     contentDescription = "Turn Off Preview MarkDown"
                                 )
                             } else {
 
                                 Icon(
-                                    imageVector = Icons.Default.VisibilityOff,
+                                    imageVector = Icons.Default.Code,
                                     contentDescription = "Preview MarkDown"
                                 )
                             }

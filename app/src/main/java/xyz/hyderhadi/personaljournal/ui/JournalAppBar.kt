@@ -31,13 +31,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import xyz.hyderhadi.personaljournal.R
 import xyz.hyderhadi.personaljournal.ui.entryscreen.JournalEntryEvents
 import xyz.hyderhadi.personaljournal.ui.entryscreen.JournalEntryViewModel
 import xyz.hyderhadi.personaljournal.ui.theme.bodyFontFamily
 import xyz.hyderhadi.personaljournal.ui.util.Screen
-import androidx.core.net.toUri
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonalJournalAppBar(
