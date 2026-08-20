@@ -16,19 +16,15 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Code
-import androidx.compose.material.icons.filled.CodeOff
 import androidx.compose.material.icons.filled.Save
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.CodeOff
-import androidx.compose.material.icons.outlined.Preview
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mikepenz.markdown.coil3.Coil3ImageTransformerImpl
-import com.mikepenz.markdown.compose.LazyMarkdownSuccess
 import com.mikepenz.markdown.m3.Markdown
 import com.mikepenz.markdown.m3.markdownColor
 import com.mikepenz.markdown.m3.markdownTypography
@@ -101,26 +96,18 @@ fun JournalEntryScreen(
                         markdownState = markdownState,
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 24.dp, vertical = 12.dp),
+                            .padding(horizontal = 24.dp, vertical = 12.dp)
+                            .verticalScroll(state.scrollState),
                         colors = markdownColor(
                             text = colors.onPrimary,
                             codeBackground = colors.tertiaryContainer,
                             inlineCodeBackground = colors.tertiary,
                         ),
                         imageTransformer = Coil3ImageTransformerImpl,
-                        success = { markdownState, components, modifier ->
-                            LazyMarkdownSuccess(
-                                state = markdownState,
-                                components = components,
-                                modifier = modifier
-                            )
-                        },
                         animations = markdownAnimations(
                             animateTextSize = { this }
                         ),
-                        typography = markdownTypography(
-
-                        )
+                        typography = markdownTypography()
                     )
                 }
                 else {
